@@ -18,7 +18,7 @@
     cannot, write to the Free Software Foundation, 59 Temple Place
     Suite 330, Boston, MA 02111-1307, USA.  Or www.fsf.org
 
-    Copyright ©2005-2007 puck_lock
+    Copyright ï¿½2005-2007 puck_lock
     with contributions from others; see the CREDITS file
                                                                    */
 //==================================================================//
@@ -389,6 +389,9 @@ void APar_Print_ID3v2_tags(AtomicInfo* id32_atom);
 void APar_Print_ISO_UserData_per_track();
 void APar_Mark_UserData_area(uint8_t track_num, short userdata_atom,
   bool quantum_listing);
+
+//output
+void APar_OutputXML();
 
 //trees
 void APar_PrintAtomicTree();
