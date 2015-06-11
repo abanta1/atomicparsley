@@ -27,7 +27,8 @@ AtomicParsley_SOURCES = \
 	src/metalist.cpp \
 	src/CDtoc.cpp \
 	src/compress.cpp \
-	src/main.cpp 
+	src/main.cpp \
+    src/outputxml.cpp
 
 # If you see a warning about this rule overriding an automake provided rule,
 # that's fine; we do this because we want to build on versions of autoconf
