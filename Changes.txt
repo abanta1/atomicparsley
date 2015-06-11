@@ -533,4 +533,13 @@ left "Short Film" to also set stik 9, for backward compatibility with work-aroun
 
 Swapped TV-Y and TV-Y7 to conform with iTunes usage.
 
+v0.9.7  06/11/2015
 
+add 'apID' atom
+add 'sfID' atom
+add 'atID' atom
+add 'geID' atom
+add 'cmID' atom
+add 'plID' atom
+added option to output mp4 atoms as XML (new options --outputXML)
+added support for 1080p videos (--hdvideo option also takes number)
