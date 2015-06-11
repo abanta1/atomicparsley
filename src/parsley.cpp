@@ -2024,6 +2024,20 @@ void APar_Unified_atom_Put(AtomicInfo* target_atom, const char* unicode_data,
 			atom_data_pos+=4;
 			break;
 		}
+		
+		case 64 : { // plID
+			target_atom->AtomicData[atom_data_pos] = (ancillary_data & 0xff00000000000000) >> 56;
+			target_atom->AtomicData[atom_data_pos + 1] = (ancillary_data & 0xff000000000000) >> 48;
+			target_atom->AtomicData[atom_data_pos + 2] = (ancillary_data & 0xff0000000000) >> 40;
+			target_atom->AtomicData[atom_data_pos + 3] = (ancillary_data & 0xff00000000) >> 32;
+			target_atom->AtomicData[atom_data_pos + 4] = (ancillary_data & 0xff000000) >> 24;
+			target_atom->AtomicData[atom_data_pos + 5] = (ancillary_data & 0xff0000) >> 16;
+			target_atom->AtomicData[atom_data_pos + 6] = (ancillary_data & 0xff00) >> 8;
+			target_atom->AtomicData[atom_data_pos + 7] = (ancillary_data & 0xff) << 0;
+			target_atom->AtomicLength+= 8;
+			atom_data_pos+=8;
+			break;
+		}
 
 		default : {
 			break;
@@ -2548,7 +2562,7 @@ AtomicInfo* APar_MetaData_atom_Init(const char* atom_path, const char* MD_Payloa
 		parsedAtoms[desiredAtom->AtomicNumber].AtomicData = (char*)malloc(sizeof(char)* MAXDATA_PAYLOAD + 1 ); //puts a hard limit on the length of strings (the spec doesn't)
 		memset(parsedAtoms[desiredAtom->AtomicNumber].AtomicData, 0, sizeof(char)* MAXDATA_PAYLOAD + 1 );
 
-		parsedAtoms[desiredAtom->AtomicNumber].AtomicLength = 16; // 4bytes atom length, 4 bytes atom length, 4 bytes version/flags, 4 bytes NULL
+		parsedAtoms[desiredAtom->AtomicNumber].AtomicLength = 16; // 4bytes atom length, 4 bytes atom name, 4 bytes version/flags, 4 bytes NULL
 		parsedAtoms[desiredAtom->AtomicNumber].AtomicVerFlags = atomFlags;
 		parsedAtoms[desiredAtom->AtomicNumber].AtomicContainerState = CHILD_ATOM;
 		parsedAtoms[desiredAtom->AtomicNumber].AtomicClassification = VERSIONED_ATOM;
@@ -4854,7 +4868,7 @@ void APar_WriteFile(const char* ISObasemediafile, const char* outfile, bool rewr
 
 		if (dynUpd.updage_by_padding) {
 			thisAtomNumber = dynUpd.initial_update_atom->AtomicNumber;
-			fprintf(stdout, "\n Updating metadata... ");
+			fprintf(stdout, "\n Updating metadata... \n");
 		} else {
 			fprintf(stdout, "\n Started writing to %s.\n",
 				outfile ? outfile : "temp file");
